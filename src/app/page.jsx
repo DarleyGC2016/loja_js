@@ -1,17 +1,17 @@
 "use client"
 import FomularioCadastro from "@/components/FomularioCadastro/FomularioCadastro";
 import { Component } from "react"
-import Container from '@mui/material/Container';
+import { Container, Typography } from '@mui/material';
 
-class App extends Component{
+import '@fontsource/roboto/300.css';
+class App extends Component {
   render() {
-      
+
     return (
       <Container component='article' maxWidth='sm'>
-        <h1>Cadastro</h1>
+        <Typography variant="h3" align="center" component='h1'>Cadastro da Loja</Typography>
         <FomularioCadastro />
       </Container>
-    
     );
   }
 }

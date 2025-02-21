@@ -2,9 +2,20 @@
 import { Button, TextField, Switch, FormControlLabel } from '@mui/material';
 
 function FomularioCadastro() {
+    let nome = "";
     return (
-        <form>
-            <TextField id="nome" label="Nome" variant="outlined" margin='normal' fullWidth />
+        <form onSubmit={event => { 
+             event.preventDefault() // preventDefault() - serve para não recarregar a página.
+            console.log(nome) } }>
+            <TextField
+                id="nome"
+                label="Nome"
+                variant="outlined"
+                margin='normal'
+                onChange={ event => {
+                    nome = event.target.value;
+                }}
+                fullWidth />
 
             <TextField id="sobrenome" label="Sobrenome" variant="outlined" margin='normal' fullWidth />
 

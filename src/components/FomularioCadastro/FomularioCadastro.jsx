@@ -3,13 +3,13 @@ import { Button, TextField, Switch, FormControlLabel } from '@mui/material';
 import { useState } from 'react';
 
 // function FomularioCadastro(props) {
-function FomularioCadastro({aoEnviar}) { // desconstruindo o propos dessa forma - FomularioCadastro({aoEnviar})
+function FomularioCadastro({ aoEnviar }) { // desconstruindo o propos dessa forma - FomularioCadastro({aoEnviar})
     const [nome, setNome] = useState("");
     const [sobrenome, setSobrenome] = useState("");
     const [cpf, setCpf] = useState("");
     const [promocoes, setPromocoes] = useState(true);
     const [novidades, setNovidades] = useState(true);
-
+    const [erros, setErros] = useState({ cpf: { valido: true, texto: "" } })
     return (
         <form onSubmit={event => {
             event.preventDefault(); // preventDefault() - serve para não recarregar a página.
@@ -53,6 +53,11 @@ function FomularioCadastro({aoEnviar}) { // desconstruindo o propos dessa forma 
                 value={cpf}
                 onChange={event => {
                     setCpf(event.target.value);
+                }}
+                error={!erros.cpf.valido}
+                helperText={erros.cpf.texto}
+                onBlur={(event) => {
+                    setErros({ cpf: { valido: false, texto: "CPF deve conter 11 digitos" } })
                 }}
                 fullWidth />
 

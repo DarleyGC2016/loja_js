@@ -2,7 +2,8 @@
 import { Button, TextField, Switch, FormControlLabel } from '@mui/material';
 import { useState } from 'react';
 
-function FomularioCadastro() {
+// function FomularioCadastro(props) {
+function FomularioCadastro({aoEnviar}) { // desconstruindo o propos dessa forma - FomularioCadastro({aoEnviar})
     const [nome, setNome] = useState("");
     const [sobrenome, setSobrenome] = useState("");
     const [cpf, setCpf] = useState("");
@@ -12,9 +13,13 @@ function FomularioCadastro() {
     return (
         <form onSubmit={event => {
             event.preventDefault(); // preventDefault() - serve para não recarregar a página.
-            console.log(nome, sobrenome);
-            console.log("promocoes: ", promocoes);
-
+            aoEnviar({
+                "name": nome,
+                "lastName": sobrenome,
+                cpf,
+                "promotions": promocoes,
+                "news": novidades
+            });
         }}>
             <TextField
                 id="nome"

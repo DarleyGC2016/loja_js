@@ -5,10 +5,16 @@ import { useState } from 'react';
 function FomularioCadastro() {
     const [nome, setNome] = useState("");
     const [sobrenome, setSobrenome] = useState("");
+    const [cpf, setCpf] = useState("");
+    const [promocoes, setPromocoes] = useState(true);
+    const [novidades, setNovidades] = useState(true);
+
     return (
         <form onSubmit={event => {
             event.preventDefault(); // preventDefault() - serve para não recarregar a página.
             console.log(nome, sobrenome);
+            console.log("promocoes: ", promocoes);
+
         }}>
             <TextField
                 id="nome"
@@ -16,13 +22,11 @@ function FomularioCadastro() {
                 variant="outlined"
                 margin='normal'
                 value={nome}
-                onChange={event => {
-                    let tempNome = event.target.value;
-                    if (tempNome.length >= 3) {
-                        tempNome = tempNome.substring(0, 3);
+                onChange={
+                    event => {
+                        setNome(event.target.value);
                     }
-                    setNome(tempNome);
-                }}
+                }
                 fullWidth />
 
             <TextField
@@ -41,14 +45,24 @@ function FomularioCadastro() {
                 label="CPF"
                 variant="outlined"
                 margin='normal'
+                value={cpf}
+                onChange={event => {
+                    setCpf(event.target.value);
+                }}
                 fullWidth />
 
             <FormControlLabel
                 control={
                     <Switch
                         name='promocoes'
-                        defaultChecked
-                        color='primary' />
+                        checked={promocoes}
+                        onChange={
+                            (event) => {
+                                setPromocoes(event.target.checked)
+                            }
+                        }
+                        color='primary'
+                    />
                 }
                 label="Promoções" />
 
@@ -56,7 +70,12 @@ function FomularioCadastro() {
                 control={
                     <Switch
                         name='novidades'
-                        defaultChecked
+                        checked={novidades}
+                        onChange={
+                            (event) => {
+                                setNovidades(event.target.checked)
+                            }
+                        }
                         color='primary' />
                 }
                 label="Novidades" />

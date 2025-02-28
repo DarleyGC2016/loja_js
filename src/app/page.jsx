@@ -20,7 +20,6 @@ class App extends Component {
 
 function aoEnviarForm(dados) {
   console.log(dados);
-  console.log("Name: ", dados.name);
 
 }
 

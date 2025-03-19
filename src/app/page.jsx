@@ -12,7 +12,11 @@ class App extends Component {
     return (
       <Container component='article' maxWidth='sm'>
         <Typography variant="h3" align="center" component='h1'>Cadastro da Loja</Typography>
-        <FomularioCadastro aoEnviar={aoEnviarForm} validarCPF={validaCpf} />
+        <FomularioCadastro
+          aoEnviar={aoEnviarForm}
+          validarCPF={validaCpf}
+          validarNome={validaNome}
+          validarSobrenome={validaSobrenome} />
       </Container>
     );
   }
@@ -30,4 +34,21 @@ function validaCpf(cpf) {
     return { valido: true, texto: "" }
   }
 }
+
+const validaNome = (nome) => {
+  if (nome.length >= 13) {
+    return { valido: false, texto: "Nome deve conter 12 caracter!" }
+  } else {
+    return { valido: true, texto: "" }
+  }
+}
+
+const validaSobrenome = (sobreNome) => {
+  if (sobreNome.length < 14 || sobreNome.length > 50) {
+    return { valido: false, texto: "Sobrenome deve conter 18 caracter!" }
+  } else {
+    return { valido: true, texto: "" }
+  }
+}
+
 export default App

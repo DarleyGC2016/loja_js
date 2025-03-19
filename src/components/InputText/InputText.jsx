@@ -1,5 +1,5 @@
 import { TextField } from "@mui/material";
-const InputText = ({ id, label, data, set }) => {
+const InputText = ({ id, label, data, erros, msgError, change, blur }) => {
   return (
     <TextField
       id={id}
@@ -7,9 +7,10 @@ const InputText = ({ id, label, data, set }) => {
       variant="outlined"
       margin="normal"
       value={data}
-      onChange={(event) => {
-        set(event.target.value);
-      }}
+      onChange={change}
+      error={erros}
+      helperText={msgError}
+      onBlur={blur}
       fullWidth
     />
   );

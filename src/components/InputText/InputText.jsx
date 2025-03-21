@@ -1,3 +1,4 @@
+"use client";
 import { TextField } from "@mui/material";
 const InputText = ({ id, label, data, erros, msgError, change, blur }) => {
   return (

@@ -1,5 +1,6 @@
 "use client";
-import { Switch, FormControlLabel } from "@mui/material";
+import { Switch, FormControlLabel, SwitchPropsColorOverrides } from "@mui/material";
+import { OverridableStringUnion } from "@mui/types";
 import { ChangeEvent } from "react";
 
 type ICamposProps = {
@@ -7,9 +8,10 @@ type ICamposProps = {
     name: string,
     label: string,
     checked: boolean
-    change: (event: ChangeEvent<HTMLInputElement>, checked: boolean) =>void,
+    change: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void,
+    color?: OverridableStringUnion<"primary" | "secondary" | "success" | "error" | "info" | "warning" | "default", SwitchPropsColorOverrides> | undefined
 }
-const InputSwitch = ({ id, name, label, checked, change }: ICamposProps) => {
+const InputSwitch = ({ id, name, label, checked, change, color }: ICamposProps) => {
     return (
         <FormControlLabel
             control={
@@ -17,7 +19,7 @@ const InputSwitch = ({ id, name, label, checked, change }: ICamposProps) => {
                     name={name}
                     checked={checked}
                     onChange={change}
-                    color="primary"
+                    color={color}
                 />
             }
             label={label}

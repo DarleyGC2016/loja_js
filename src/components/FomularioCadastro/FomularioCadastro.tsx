@@ -91,6 +91,7 @@ function FomularioCadastro({ aoEnviar, validarCPF, validarNome, validarSobrenome
           setUsuario({ ...usuario, promocoes: event.target.checked });
         }}
         label="Promoções"
+        color="success"
       />
 
       <InputSwitch
@@ -101,6 +102,7 @@ function FomularioCadastro({ aoEnviar, validarCPF, validarNome, validarSobrenome
           setUsuario({ ...usuario, novidades: event.target.checked });
         }}
         label="Novidades"
+        color="error"
       />
 
       <Button type="submit" variant="contained" color="primary">

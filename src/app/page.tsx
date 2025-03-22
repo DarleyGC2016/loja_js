@@ -4,6 +4,7 @@ import { Component } from "react"
 import { Container, Typography } from '@mui/material';
 
 import '@fontsource/roboto/300.css';
+import { IUsuario, IValidacao } from "@/model/model";
 
 
 class App extends Component {
@@ -22,12 +23,12 @@ class App extends Component {
   }
 }
 
-function aoEnviarForm(dados) {
+const aoEnviarForm = (dados: IUsuario): void => {
   console.log(dados);
 
 }
 
-function validaCpf(cpf) {
+function validaCpf(cpf: string): IValidacao {
   if (cpf.length != 11) {
     return { valido: false, texto: "CPF deve conter 11 digitos!" }
   } else {
@@ -35,7 +36,7 @@ function validaCpf(cpf) {
   }
 }
 
-const validaNome = (nome) => {
+const validaNome = (nome: string): IValidacao => {
   if (nome.length >= 13) {
     return { valido: false, texto: "Nome deve conter 12 caracter!" }
   } else {
@@ -43,7 +44,7 @@ const validaNome = (nome) => {
   }
 }
 
-const validaSobrenome = (sobreNome) => {
+const validaSobrenome = (sobreNome: string): IValidacao => {
   if (sobreNome.length < 14 || sobreNome.length > 50) {
     return { valido: false, texto: "Sobrenome deve conter 18 caracter!" }
   } else {

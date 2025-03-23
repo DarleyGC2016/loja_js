@@ -3,14 +3,7 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import InputText from "../InputText/InputText";
 import InputSwitch from "../InputSwitch/InputSwitch";
-import { IUsuario, IValidacao } from "@/model/model";
-
-interface IFunctions {
-  aoEnviar: (dados: IUsuario) => void,
-  validarCPF: (cpf: string) => IValidacao,
-  validarNome: (nome: string) => IValidacao,
-  validarSobrenome: (sobreNome: string) => IValidacao
-}
+import { IUsuario, IFunctions } from "@/model/model";
 
 function FomularioCadastro({ aoEnviar, validarCPF, validarNome, validarSobrenome }: IFunctions) {
 

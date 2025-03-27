@@ -1,105 +1,72 @@
 "use client";
-import { Button } from "@mui/material";
-import { useState } from "react";
-import InputText from "../InputText/InputText";
-import InputSwitch from "../InputSwitch/InputSwitch";
-import { IUsuario, IFunctions } from "@/model/model";
+import { Button, FormControlLabel, Switch, TextField, Typography } from "@mui/material";
+import { userSchema, UserSchema } from "@/model/model";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 
-function FomularioCadastro({ aoEnviar, validarCPF, validarNome, validarSobrenome }: IFunctions) {
-
-  const [usuario, setUsuario] = useState<IUsuario>({
-    nome: '',
-    sobrenome: '',
-    cpf: '',
-    promocoes: true,
-    novidades: true
+const FomularioCadastro = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm<UserSchema>({
+    mode: "all",
+    resolver: zodResolver(userSchema)
   })
-  const [erros, setErros] = useState({
-    nome: { valido: true, texto: "" },
-    sobrenome: { valido: true, texto: "" },
-    cpf: { valido: true, texto: "" }
-  });
+
+  const handleUser = (data: UserSchema) => {
+    console.log("User data: ", data);
+
+  }
 
   return (
     <form
-      onSubmit={(event) => {
-        event.preventDefault(); // preventDefault() - serve para não recarregar a página.
-        const dados: IUsuario = {
-          nome: usuario.nome,
-          sobrenome: usuario.sobrenome,
-          cpf: usuario.cpf,
-          promocoes: usuario.promocoes,
-          novidades: usuario.novidades
-        };
-
-        aoEnviar(dados);
-      }}
+      onSubmit={handleSubmit(handleUser)}
     >
-      <InputText
-        id="nome"
+      <Typography variant="h3" align="center" component="h1">
+          Cadastro da Loja
+      </Typography>
+      <TextField
+        id="name"
         label="Nome"
-        data={usuario.nome}
-        change={(event): void => {
-          setUsuario({ ...usuario, nome: event.target.value })
-        }}
-        erros={!erros.nome.valido}
-        msgError={erros.nome.texto}
-        blur={() => {
-          setErros({ ...erros, nome: validarNome(usuario.nome) })
-        }}
+        {...register("name")}
+        fullWidth
       />
-
-      <InputText
-        id="sobrenome"
-        label="Sobrenome"
-        data={usuario.sobrenome}
-        change={(event) => {
-          setUsuario({ ...usuario, sobrenome: event.target.value })
-        }}
-        erros={!erros.sobrenome.valido}
-        msgError={erros.sobrenome.texto}
-        blur={() => {
-          setErros({ ...erros, sobrenome: validarSobrenome(usuario.sobrenome) })
-        }}
+      <TextField
+        id="lastName"
+        label="sobreNome"
+        {...register("lastName")}
+        fullWidth
       />
-
-      <InputText id="cpf"
+      <TextField
+        id="cpf"
         label="CPF"
-        data={usuario.cpf}
-        change={(event) => {
-          setUsuario({ ...usuario, cpf: event.target.value })
-        }}
-        erros={!erros.cpf.valido}
-        msgError={erros.cpf.texto}
-        blur={() => {
-          setErros({ ...erros, cpf: validarCPF(usuario.cpf) })
-        }}
+        {...register("cpf")}
+        fullWidth
       />
 
-      <InputSwitch
-        id="promocoes"
-        name="promocoes"
-        checked={usuario.promocoes}
-        change={(event) => {
-          setUsuario({ ...usuario, promocoes: event.target.checked });
-        }}
+
+      <FormControlLabel
+        control={
+          <Switch
+            {...register("prom")}
+            color="success"
+          />
+        }
         label="Promoções"
-        color="success"
+        id="promocoes"
       />
 
-      <InputSwitch
-        id="novidades"
-        name="novidades"
-        checked={usuario.novidades}
-        change={(event) => {
-          setUsuario({ ...usuario, novidades: event.target.checked });
-        }}
+      <FormControlLabel
+        control={
+          <Switch
+            {...register("news")}
+            color="error"
+          />
+        }
         label="Novidades"
-        color="error"
+        id="novidades"
       />
 
       <Button type="submit" variant="contained" color="primary">
-        Cadastrar
+        <Link href="/">Cadastrar</Link>
       </Button>
     </form>
   );

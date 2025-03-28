@@ -1,13 +1,12 @@
 "use client"
-import FomularioCadastro from "@/components/FomularioCadastro/FomularioCadastro";
+
+import UserProvider from "@/components/UserProvider/UserProvider";
 import { Container } from "@mui/material";
 
-
-
-export default function FormUsuario()  {
+export default function NewUser()  {
   return (
     <Container component="article" maxWidth="sm">
-      <FomularioCadastro/>
+      <UserProvider />
     </Container>
   );
 };

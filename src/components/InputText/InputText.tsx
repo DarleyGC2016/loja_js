@@ -1,32 +1,27 @@
 "use client";
 import { TextField } from "@mui/material";
-import { ChangeEvent } from "react";
+import { Controller, FieldValues, Path, useFormContext } from "react-hook-form";
 
-interface ICamposProps {
-  id: string,
+type Props<T extends FieldValues> = {
+  name: Path<T>,
   label: string,
-  data: string | number,
-  erros: boolean,
-  msgError: string,
-  change: (event: ChangeEvent<HTMLInputElement>)  => void,
-  blur: () => void
 }
 
-const InputText = ({ id, label, data, erros, msgError, change, blur }: ICamposProps) => {
+export default function InputText<T extends FieldValues>({ name, label }: Props<T>) {
+  const { control } = useFormContext()
   return (
-    <TextField
-      id={id}
-      label={label}
-      variant="outlined"
-      margin="normal"
-      value={data}
-      onChange={change}
-      error={erros}
-      helperText={msgError}
-      onBlur={blur}
-      fullWidth
+    <Controller
+      control={control}
+      name={name}
+      render={({ field, fieldState: { error } }) => {
+        return <TextField
+          label={label}
+          {...field}
+          error={!!error}
+          helperText={error?.message}
+
+        />;
+      }}
     />
   );
 };
-
-export default InputText;

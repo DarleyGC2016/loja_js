@@ -1,22 +1,13 @@
-import { FormProvider, useForm } from "react-hook-form"
+import { FormProvider } from "react-hook-form"
 import UserForm from "../UserForm/UserForm";
-import { userSchema, UserSchema } from "@/model/model";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Typography } from "@mui/material";
+import { UserSchema } from "@/types/types";
+import { useUser } from "@/hook/user/useUser";
 
 
 const UserProvider = () => {
-    const methods = useForm<UserSchema>({
-        mode: "all",
-        resolver: zodResolver(userSchema),
-        defaultValues: {
-            name: "",
-            lastName: "",
-            cpf: "",
-            news: true,
-            prom: true
-        }
-    });
-
+    const {methods} = useUser();
+    
     function handleCreateUserSubmit(data: UserSchema) {
         console.log('Data: ', data);
 
@@ -25,6 +16,9 @@ const UserProvider = () => {
     return (
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(handleCreateUserSubmit)}>
+                <Typography variant="h3" align="center" component="h1">
+                    Cadastro da Loja
+                </Typography>
                 <UserForm />
             </form>
         </FormProvider>

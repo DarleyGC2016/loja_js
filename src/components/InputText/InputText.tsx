@@ -1,12 +1,7 @@
 "use client";
+import { InputTextProps } from "@/types/types";
 import { TextField } from "@mui/material";
-import { Controller, FieldValues, Path, useFormContext } from "react-hook-form";
-
-type InputTextProps<T extends FieldValues> = {
-  id: string,
-  name: Path<T>,
-  label: string,
-}
+import { Controller, FieldValues, useFormContext } from "react-hook-form";
 
 export default function InputText<T extends FieldValues>({ id, name, label }: InputTextProps<T>) {
   const { control } = useFormContext()

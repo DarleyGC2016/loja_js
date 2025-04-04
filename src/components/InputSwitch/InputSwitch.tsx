@@ -1,14 +1,8 @@
 "use client";
-import { Switch, FormControlLabel, SwitchPropsColorOverrides } from "@mui/material";
-import { OverridableStringUnion } from "@mui/types";
-import { Controller, FieldValues, Path, useFormContext } from "react-hook-form";
+import { InputSwitchProps } from "@/types/types";
+import { Switch, FormControlLabel } from "@mui/material";
 
-type InputSwitchProps<T extends FieldValues> = {
-    id: string
-    name: Path<T>,
-    label: string,
-    color?: OverridableStringUnion<"primary" | "secondary" | "success" | "error" | "info" | "warning" | "default", SwitchPropsColorOverrides> | undefined
-}
+import { Controller, FieldValues, useFormContext } from "react-hook-form";
 
 export default function InputSwitch<T extends FieldValues>({ id, name, label, color }: InputSwitchProps<T>) {
     const { control } = useFormContext()

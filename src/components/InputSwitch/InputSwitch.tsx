@@ -3,30 +3,33 @@ import { Switch, FormControlLabel, SwitchPropsColorOverrides } from "@mui/materi
 import { OverridableStringUnion } from "@mui/types";
 import { Controller, FieldValues, Path, useFormContext } from "react-hook-form";
 
-type Props<T extends FieldValues> = {
-  name: Path<T>,
-  label: string,
-  color?: OverridableStringUnion<"primary" | "secondary" | "success" | "error" | "info" | "warning" | "default", SwitchPropsColorOverrides> | undefined
+type InputSwitchProps<T extends FieldValues> = {
+    id: string
+    name: Path<T>,
+    label: string,
+    color?: OverridableStringUnion<"primary" | "secondary" | "success" | "error" | "info" | "warning" | "default", SwitchPropsColorOverrides> | undefined
 }
 
-export default function InputSwitch<T extends FieldValues> ({  name, label, color }: Props<T>)  {
+export default function InputSwitch<T extends FieldValues>({ id, name, label, color }: InputSwitchProps<T>) {
     const { control } = useFormContext()
     return (
         <Controller
-        control={control}
-        name={name}
-        render={({ field}) => {
-        return <FormControlLabel
-            control={
-                <Switch
-                    {...field}
-                    name={name}
-                    color={color}
+            control={control}
+            name={name}
+            render={({ field }) => {
+                return <FormControlLabel
+                    control={
+                        <Switch
+                            {...field}
+                            name={name}
+                            color={color}
+                        />
+                    }
+                    label={label}
+                    id={id}
                 />
             }
-            label={label}
-        />}
-    }
-    />
+            }
+        />
     )
 }

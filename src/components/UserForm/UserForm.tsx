@@ -1,25 +1,21 @@
 "use client";
-import { Button, Stack, Typography } from "@mui/material";
-import { UserSchema } from "@/model/model";
+import { Button, Stack } from "@mui/material";
 import InputText from "../InputText/InputText";
 import InputSwitch from "../InputSwitch/InputSwitch";
+import { UserSchema } from "@/types/types";
 // import Link from "next/link";
 
 const UserForm = () => {
 
   return (
     <Stack sx={{ gap: 2 }}>
-
-      <Typography variant="h3" align="center" component="h1">
-        Cadastro da Loja
-      </Typography>
-      <InputText<UserSchema> name="name" label="Nome" />
-      <InputText<UserSchema> name="lastName" label="Sobrenome" />
-      <InputText<UserSchema> name="cpf" label="CPF" />
+      <InputText<UserSchema> id="name" name="name" label="Nome" />
+      <InputText<UserSchema> id="lastName" name="lastName" label="Sobrenome" />
+      <InputText<UserSchema> id="cpf" name="cpf" label="CPF" />
 
       <div>
-        <InputSwitch<UserSchema> name="prom" label="Promoções" color="success"/>
-        <InputSwitch<UserSchema> name="news" label="Novidades" color="error"/>
+        <InputSwitch<UserSchema> id="promocoes" name="prom" label="Promoções" color="success"/>
+        <InputSwitch<UserSchema> id="novidades" name="news" label="Novidades" color="error"/>
       </div>
 
       <Button type="submit" variant="contained" color="primary">

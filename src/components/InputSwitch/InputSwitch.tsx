@@ -17,6 +17,7 @@ export default function InputSwitch<T extends FieldValues>({ id, name, label, co
                             {...field}
                             name={name}
                             color={color}
+                            checked={field.value}
                         />
                     }
                     label={label}

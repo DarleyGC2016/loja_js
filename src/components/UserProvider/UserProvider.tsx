@@ -6,7 +6,13 @@ import { useUser } from "@/hook/user/useUser";
 
 
 const UserProvider = () => {
-    const {methods} = useUser();
+    const {methods} = useUser({
+        name: "",
+        lastName: "",
+        cpf: "",
+        news: false,
+        prom: false
+    });
     
     function handleCreateUserSubmit(data: UserSchema) {
         console.log('Data: ', data);
